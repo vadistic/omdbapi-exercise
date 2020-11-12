@@ -1,21 +1,18 @@
 import { Injectable } from '@nestjs/common'
-import { ConfigService } from '@nestjs/config'
 import axios from 'axios'
 import qs from 'querystring'
 
-import { Config } from '../../config/config'
+import { config } from '../../config'
 
 import { OmdbSearchManyDto, OmdbSearchOneDto } from './omdb.dto'
-import { OmdbMovie, OmdbMoviesList, OmdbNotFound } from './omdb.interfaces'
+import { OmdbMovie, OmdbMoviesList, OmdbResponse } from './omdb.interfaces'
 
 @Injectable()
 export class OmdbService {
-  constructor(readonly config: ConfigService<Config>) {}
-
   fetcher = axios.create({
     baseURL: `http://www.omdbapi.com/`,
     params: {
-      apikey: this.config.get('omdb_key'),
+      apikey: config.omdb_key,
       r: 'json',
     },
     timeout: 5000,
@@ -26,7 +23,7 @@ export class OmdbService {
   })
 
   async fetchOne(params: OmdbSearchOneDto): Promise<OmdbMovie | undefined> {
-    const res = await this.fetcher.get<OmdbMovie | OmdbNotFound>('/', {
+    const res = await this.fetcher.get<OmdbResponse<OmdbMovie>>('/', {
       params,
       timeout: 2000,
       responseType: 'json',
@@ -40,7 +37,7 @@ export class OmdbService {
   }
 
   async fetchMany(params: OmdbSearchManyDto): Promise<OmdbMoviesList | undefined> {
-    const res = await this.fetcher.get<OmdbMoviesList | OmdbNotFound>('/', {
+    const res = await this.fetcher.get<OmdbResponse<OmdbMoviesList>>('/', {
       params,
       timeout: 2000,
       responseType: 'json',

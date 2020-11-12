@@ -1,10 +1,9 @@
-/**
- * @example {"Response":"False","Error":"Movie not found!"}
- */
-export interface OmdbNotFound {
-  Response: 'False'
-  Error: string
-}
+export type OmdbResponse<T> =
+  | {
+      Response: 'False'
+      Error: string
+    }
+  | ({ Response: 'True' } & T)
 
 /**
  * @example { "Source": "Internet Movie Database", "Value": "8.1/10" }
@@ -27,7 +26,7 @@ export interface OmdbMovie {
   Rated: string
   /** @example '10 Oct 2003' */
   Released: string
-  /** @example '' */
+  /** @example '111 min' */
   Runtime: string
   /** @example 'Action, Crime, Thriller' */
   Genre: string
@@ -47,7 +46,7 @@ export interface OmdbMovie {
   Awards: string
   /** @example 'https://m.media-amazon.com/images/M/MV5BNzM3NDFhYTAtYmU5Mi00NGRmLTljYjgtMDkyODQ4MjNkMGY2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg' */
   Poster: string
-  /** @example [{"Response":"False","Error":"Movie not found!"}] */
+  /** @example [{ "Source": "Internet Movie Database", "Value": "8.1/10" }] */
   Ratings: OmdbRating[]
   /** @example '69' */
   Metascore: string
@@ -59,7 +58,7 @@ export interface OmdbMovie {
   imdbID: string
   /** @example 'movie' */
   Type: OmdbResultType
-  /** @example '' */
+  /** @example 'N/A' */
   DVD: 'N/A'
   /** @example 'N/A' */
   BoxOffice: string
@@ -67,8 +66,6 @@ export interface OmdbMovie {
   Production: string
   /** @example 'N/A' */
   Website: string
-  /** @example 'True' */
-  Response: 'True'
 }
 
 export interface OmdbMovieItem {
@@ -87,5 +84,4 @@ export interface OmdbMovieItem {
 export interface OmdbMoviesList {
   Search: OmdbMovieItem[]
   totalResults: '10'
-  Response: 'True'
 }
