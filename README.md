@@ -2,7 +2,7 @@
 
 ## Description
 
-Quick refresher exercise with nestjs & typeorm
+Simple moviedb api as a refresher exercise with nestjs & typeorm
 
 ## Installation
 

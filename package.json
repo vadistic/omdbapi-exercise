@@ -1,8 +1,8 @@
 {
-  "name": "moviedb-api-exrecise",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "name": "omdbapi-exercise",
+  "version": "0.1.0",
+  "description": "Simple moviedb api as a refresher exercise with nestjs & typeorm",
+  "author": "Jakub Wadas <vadistic@gmail.com>",
   "private": true,
   "license": "MIT",
   "scripts": {
