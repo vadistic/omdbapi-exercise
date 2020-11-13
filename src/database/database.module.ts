@@ -3,9 +3,9 @@ import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm/dist/typeorm.module'
 
 import { config } from '../config'
-import { Movie, MovieRating } from '../features/movie/movie.model'
+import { MovieEntity } from '../features/movie/movie.entity'
 
-const entities = [Movie, MovieRating]
+const entities = [MovieEntity]
 
 @Module({
   imports: [
@@ -20,7 +20,11 @@ const entities = [Movie, MovieRating]
       port: config.postgres_port,
 
       ssl: false,
-      synchronize: true, // FIXME: disable later
+
+      logging: config.dev,
+      // FIXME: disable later
+      // synchronize: true,
+      // dropSchema: true,
     }),
   ],
 })

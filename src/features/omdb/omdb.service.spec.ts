@@ -18,7 +18,7 @@ describe('OmdbService', () => {
     expect(service).toBeDefined()
   })
 
-  it(`should find 'Kill bill'`, async () => {
+  it(`should find 'Kill Bill'`, async () => {
     const res = await service.fetchOne({ t: 'Kill Bill' })
 
     expect(res).toBeDefined()
